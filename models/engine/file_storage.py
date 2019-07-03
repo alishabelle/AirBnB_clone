@@ -25,10 +25,22 @@ class FileStorage:
     def reload(self):
         import os.path
         from models.base_model import BaseModel
+        from models.user import User
+        from models.state import State
+        from models.city import City
+        from models.amenity import Amenity
+        from models.place import Place
+        from models.review import Review
+
+        list_class = ["BaseModel", "Amenity", "City", "Place",
+                      "Review", "State", "User"]
 
         if os.path.exists(FileStorage.__file_path):
             with open(FileStorage.__file_path, "r") as my_file:
                 FileStorage.__objects = json.load(my_file)
-        for key, val in FileStorage.__objects.items():
-            new_obj = BaseModel(None, **val)
-            FileStorage.__objects[key] = new_obj
+                for key, val in FileStorage.__objects.items():
+                    new_obj = FileStorage.__objects[key].get("__class__")
+                    if new_obj in list_class:
+                        class_fun = list_class.get(new_obj)
+                        FileStorage.__objects[key] = class_fun(**FileStorage.
+                                                               __objects[key])
