@@ -134,7 +134,8 @@ class HBNBCommand(cmd.Cmd):
                 string_success = -1
                 numdots = 0
                 check = 0
-                if ListofArgs[2] != 'created_at' or ListofArgs[2] != 'updated_at' or 'id':
+                if ListofArgs[2] != 'created_at' or\
+                   ListofArgs[2] != 'updated_at' or 'id':
                     value = ListofArgs[3]
                     if ListofArgs[3][:1] == '"' or ListofArgs[3][-1:] == '"':
                         string_success = 0

@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ write a place class that inherits from basemodel """
 
+
 class Place(BaseModel):
     """ place class basemodel is parent """
     city_id = ""
@@ -14,4 +15,3 @@ class Place(BaseModel):
     latitude = 0.0
     longitude = 0.0
     amenity_ids = ""
-
