@@ -10,9 +10,6 @@ class User(BaseModel):
     first_name = ""
     last_name = ""
 
-    def __init__(self, *args, **wouldbekwargs):
+    def __init__(self, *args, **kwargs):
         """ ititializing these user class """
-        if (wouldbekwargs.get('id') is not None):
-            self.__dict__ = wouldbekwargs
-        else:
-            super().__init__(self)
+        super().__init__(self, *args, **kwargs)
