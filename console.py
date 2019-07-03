@@ -3,8 +3,10 @@
 
 import cmd
 from models.base_model import BaseModel
+from models.user import User
 from models import storage
 import json
+import uuid
 
 
 class HBNBCommand(cmd.Cmd):
@@ -28,10 +30,14 @@ class HBNBCommand(cmd.Cmd):
         ListofArgs = args.split()
         if len(ListofArgs) == 0:
             print('** class name missing **')
-        elif ListofArgs[0] != 'BaseModel':
+        elif ListofArgs[0] != 'BaseModel' and ListofArgs[0] != 'User':
             print("** class doesn\'t exist **")
         else:
-            instance = BaseModel()
+            if ListofArgs[0] == 'BaseModel':
+                instance = BaseModel()
+            elif ListofArgs[0] == 'User':
+                    instance = User()
+                    setattr(instance, 'id', str(uuid.uuid4()))
             instance.save()
             print(instance.id)
 
@@ -40,7 +46,7 @@ class HBNBCommand(cmd.Cmd):
         ListofArgs = args.split()
         if len(ListofArgs) == 0:
             print('** class name missing **')
-        elif ListofArgs[0] != 'BaseModel':
+        elif ListofArgs[0] != 'BaseModel' and ListofArgs[0] != 'User':
             print("** class doesn\'t exist **")
         elif len(ListofArgs) < 2:
             print('** instance id missing **')
@@ -49,11 +55,17 @@ class HBNBCommand(cmd.Cmd):
             if len(all_objs) == 0:
                 print('** no instance found **')
             else:
-                a_key = 'BaseModel.' + ListofArgs[1]
+                if ListofArgs[0] == 'BaseModel':
+                    a_key = 'BaseModel.' + ListofArgs[1]
+                elif ListofArgs[0] == 'User':
+                    a_key = 'User.' + ListofArgs[1]
                 keys = list(all_objs.keys())
                 if a_key in keys:
                     wouldbekwargs = all_objs[a_key]
-                    instance = BaseModel(None, **wouldbekwargs)
+                    if ListofArgs[0] == 'BaseModel':
+                        instance = BaseModel(None, **wouldbekwargs)
+                    elif ListofArgs[0] == 'User':
+                        instance = User(None, **wouldbekwargs)
                     print(instance)
                 else:
                     print('** no instance found **')
@@ -63,7 +75,7 @@ class HBNBCommand(cmd.Cmd):
         ListofArgs = args.split()
         if len(ListofArgs) == 0:
             print('** class name missing **')
-        elif ListofArgs[0] != 'BaseModel':
+        elif ListofArgs[0] != 'BaseModel' and ListofArgs[0] != 'User':
             print("** class doesn\'t exist **")
         elif len(ListofArgs) < 2:
             print('** instance id missing **')
@@ -72,7 +84,10 @@ class HBNBCommand(cmd.Cmd):
             if len(all_objs) == 0:
                 print('** no instance found **')
             else:
-                a_key = 'BaseModel.' + ListofArgs[1]
+                if ListofArgs[0] == 'BaseModel':
+                    a_key = 'BaseModel.' + ListofArgs[1]
+                elif ListofArgs[0] == 'User':
+                    a_key = 'User.' + ListofArgs[1]
                 keys = list(all_objs.keys())
                 if a_key in keys:
                     del all_objs[a_key]
@@ -91,13 +106,21 @@ class HBNBCommand(cmd.Cmd):
             all_objs = storage.all()
             for key, val in all_objs.items():
                 wouldbekwargs = all_objs[key]
-                instance = BaseModel(None, **wouldbekwargs)
+                if 'BaseModel' in key:
+                    instance = BaseModel(None, **wouldbekwargs)
+                elif 'User' in key:
+                    instance = User(None, **wouldbekwargs)
                 listerine.append(instance.__str__())
             print(listerine)
-        elif ListofArgs[0] == 'BaseModel':
+        elif ListofArgs[0] == 'BaseModel' or ListofArgs[0] == 'User':
             all_objs = storage.all()
             for key, val in all_objs.items():
                 if 'BaseModel' in key:
+                    x = 1
+                    wouldbekwargs = all_objs[key]
+                    instance = BaseModel(None, **wouldbekwargs)
+                    listerine.append(instance.__str__())
+                if 'User' in key:
                     x = 1
                     wouldbekwargs = all_objs[key]
                     instance = BaseModel(None, **wouldbekwargs)
@@ -114,7 +137,7 @@ class HBNBCommand(cmd.Cmd):
         ListofArgs = args.split()
         if len(ListofArgs) == 0:
             print("** class name missing **")
-        elif ListofArgs[0] != 'BaseModel':
+        elif ListofArgs[0] != 'BaseModel' and ListofArgs[0] != 'User':
             print("** class doesn't exist **")
         elif len(ListofArgs) == 1:
             print("** instance id missing **")

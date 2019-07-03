@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+""" This file imports stuff and creates the BaseModel class """
 import uuid
 import datetime
 from models import storage
@@ -17,7 +18,7 @@ class BaseModel:
     """
 
     def __init__(self, *args, **kwargs):
-        """ Instantiation """
+        """ Instantiation of the class"""
         if kwargs:  # Same thing as if len(kwargs) != 0
             for key, val, in kwargs.items():
                 if key == "created_at" or key == "updated_at":

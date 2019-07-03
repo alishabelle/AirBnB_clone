@@ -25,10 +25,14 @@ class FileStorage:
     def reload(self):
         import os.path
         from models.base_model import BaseModel
+        from models.user import User
 
         if os.path.exists(FileStorage.__file_path):
             with open(FileStorage.__file_path, "r") as my_file:
                 FileStorage.__objects = json.load(my_file)
         for key, val in FileStorage.__objects.items():
-            new_obj = BaseModel(None, **val)
+            if 'BaseModel' in key:
+                new_obj = BaseModel(None, **val)
+            elif 'User' in key:
+                new_obj = User(None, **val)
             FileStorage.__objects[key] = new_obj
