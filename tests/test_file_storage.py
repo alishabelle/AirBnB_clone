@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+""" 2 mediocre tests for FileStorage class """
 import unittest
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
@@ -23,8 +24,10 @@ class Test_FileStorage(unittest.TestCase):
         self.assertEqual(dict, type(instance.all()))
 
     def test3(self):
+        """ Test to check if storage.all() worked properly """
         model_one = BaseModel()
         model_one.save()
         all_objs = storage.all()
         for obj_id in all_objs.keys():
             obj = all_objs[obj_id]
+        self.assertNotEqual(len(all_objs), 0)

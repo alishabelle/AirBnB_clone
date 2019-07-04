@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+""" Several simple tests to check if BaseModel methods work properly"""
 import unittest
 from models.base_model import BaseModel
 
