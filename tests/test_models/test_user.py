@@ -41,7 +41,7 @@ class test_user(unittest.TestCase):
         """ tests user class inherits from basemodel """
 
         new_jawn = User()
-        self.asserIsInstacne(new_jawn, BaseModel)
+        self.asserIsInstance(new_jawn, BaseModel)
 
     def test_attribute(self):
         """ tests the class name attribute of user """
