@@ -22,8 +22,8 @@ class test_state(unittest.TestCase):
         new_jawn = State()
         self.assertIsInstance(new_jawn, BaseModel)
 
-     def test_attribute(self):
-         """ tests the class name attribute of user """
+    def test_attribute(self):
+        """ tests the class name attribute of user """
 
-         new_jawn = State()
-         self.assertTrue("name" in new_jawn.__dir__())
+        new_jawn = State()
+        self.assertTrue("name" in new_jawn.__dir__())
