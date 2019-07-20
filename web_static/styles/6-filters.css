@@ -58,9 +58,11 @@ h4 {
     position:absolute;
     list-style:none;
     display:none;
-    margin-top:-1px;
-    width:13.85%;
+    margin-right:-12px;
+    margin-top:5.5px;
+    width:13.86%;
     padding:25px;
+    z-index:1;
 }
 
 .popover li {
@@ -70,10 +72,11 @@ h4 {
 
 .locations:hover .popover {
     display:inline-block;
+    position:absolute;
 }
 
 .amenities:hover .popover {
-    margin-top:-1px;
-    margin-left:-6px;
+    margin-top:5.5px;
+    margin-left:-5px;
     display:inline-block;
 }
